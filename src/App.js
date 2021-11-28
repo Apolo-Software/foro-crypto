@@ -20,9 +20,11 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Foro Crypto</h1>
-      <TableCoins coins={coins} />
+    <div className="container">
+      <div className="row">
+        <h1>Foro Crypto</h1>
+        <TableCoins coins={coins} />
+      </div>
     </div>
   );
 }
