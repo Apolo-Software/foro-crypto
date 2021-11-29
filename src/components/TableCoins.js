@@ -1,28 +1,34 @@
 import React from "react";
 import CoinRow from "./CoinRow";
 
-const TableCoins = ({ coins }) => {
-  const titles = [
-    "#",
-    "Coin",
-    "Current Price",
-    "Price Change",
-    "24h Volume",
-    "Total Volume",
-  ];
+const titles = [
+  "#",
+  "Coin",
+  "Current Price",
+  "Price Change",
+  "24h Volume",
+  "Total Volume",
+];
+
+const TableCoins = ({ coins, search }) => {
+  const filteredCoins = coins.filter(
+    (coin) =>
+      coin.name.toLowerCase().includes(search.toLowerCase()) |
+      coin.symbol.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div>
       <table className="table table-dark mt-4 table-hover">
         <thead>
           <tr>
-            {titles.map((title) => (
-              <td>{title}</td>
+            {titles.map((title, index) => (
+              <td key={index}>{title}</td>
             ))}
           </tr>
         </thead>
         <tbody>
-          {coins.map((coin, index) => (
+          {filteredCoins.map((coin, index) => (
             <CoinRow coin={coin} key={index} index={index + 1} />
           ))}
         </tbody>

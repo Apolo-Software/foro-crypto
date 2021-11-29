@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import TableCoins from "./components/TableCoins";
+import Navbar from "./components/Navbar";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const [coins, setCoins] = useState([]);
+  const [search, setSearch] = useState("");
 
   const getData = async () => {
     const res = await axios.get(
@@ -22,8 +25,16 @@ function App() {
   return (
     <div className="container">
       <div className="row">
-        <h1>Foro Crypto</h1>
-        <TableCoins coins={coins} />
+        <Router>
+          <Navbar />
+        </Router>
+        <input
+          type="text"
+          placeholder="Search a coin"
+          className="form-control bg-dark text-light border-0 mt-4 text-center"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <TableCoins coins={coins} search={search} />
       </div>
     </div>
   );
